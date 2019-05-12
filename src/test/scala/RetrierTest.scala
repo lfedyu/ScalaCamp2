@@ -1,10 +1,10 @@
 import org.scalatest.FunSuite
 import scala.concurrent.duration._
 
-class MainTest extends FunSuite {
+class RetrierTest extends FunSuite {
 
   test("testLessThen") {
-    val res = Main.retry[Int](block = attempt => {
+    val res = Retrier.retry[Int](block = attempt => {
       println("block " + (attempt+1))
       attempt+1
     },
@@ -15,7 +15,7 @@ class MainTest extends FunSuite {
 
   test("testFailed") {
     intercept[Exception]{
-      val res = Main.retry[Int](block = attempt => {
+      val res = Retrier.retry[Int](block = attempt => {
         println("block " + attempt)
         attempt
       },
